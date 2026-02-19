@@ -47,7 +47,13 @@ impl CalContext {
         let k: i32 = year_i % 100;
         let j: i32 = year_i / 100;
 
-        let h = (q + (13 * (m as i32 + 1)) / 5 + k + k / 4 + j / 4 - 2 * j) % 7;
+        let h = if year < self.reform_year {
+            // Julian calendar: no century correction
+            (q + (13 * (m as i32 + 1)) / 5 + k + k / 4 + 5).rem_euclid(7)
+        } else {
+            // Gregorian calendar
+            (q + (13 * (m as i32 + 1)) / 5 + k + k / 4 + j / 4 - 2 * j).rem_euclid(7)
+        };
         // h: 0=Sat, 1=Sun, 2=Mon, 3=Tue, 4=Wed, 5=Thu, 6=Fri
         match h {
             0 => Weekday::Sat,

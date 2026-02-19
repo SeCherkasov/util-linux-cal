@@ -1,6 +1,6 @@
 [package]
 name = "holiday_highlighter"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "Holiday highlighting plugin for cal using isdayoff.ru API"
 
