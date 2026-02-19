@@ -751,6 +751,7 @@ pub fn print_year(ctx: &CalContext, year: i32) {
     }
     println!();
 
+    #[cfg(feature = "plugins")]
     if ctx.holidays {
         preload_year_holidays(ctx, year);
     }
@@ -861,6 +862,7 @@ pub fn print_three_months_vertical(ctx: &CalContext, months: &[MonthData]) {
 /// Print 12 months starting from a given month (--twelve mode).
 pub fn print_twelve_months(ctx: &CalContext, start_year: i32, start_month: u32) {
     // Preload holiday data for all 12 months
+    #[cfg(feature = "plugins")]
     if ctx.holidays {
         for i in 0..12 {
             let mut month = start_month + i;
@@ -923,6 +925,7 @@ pub fn print_months_count(
     };
 
     // Preload holiday data for all months
+    #[cfg(feature = "plugins")]
     if ctx.holidays {
         for i in 0..count {
             let mut month = actual_start_month + i;
