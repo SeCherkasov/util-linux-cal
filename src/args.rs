@@ -13,7 +13,7 @@ use crate::types::{
 #[derive(Parser, Debug)]
 #[command(name = "cal")]
 #[command(about = "Displays calendar for specified month or year", long_about = None)]
-#[command(version = "1.0.0")]
+#[command(version)]
 #[command(after_help = HELP_MESSAGE)]
 pub struct Args {
     /// Week starts on Sunday (default is Monday).

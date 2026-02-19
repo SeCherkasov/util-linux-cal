@@ -157,8 +157,14 @@ pub unsafe extern "C" fn plugin_get_year_holidays(
 }
 
 /// Fetch holiday data for a month from isdayoff.ru API.
-fn fetch_holidays(year: i32, month: u32, _country: &str) -> Option<String> {
-    let url = format!("{}?year={}&month={:02}&pre=1", API_URL_MONTH, year, month);
+fn fetch_holidays(year: i32, month: u32, country: &str) -> Option<String> {
+    let url = format!(
+        "{}?year={}&month={:02}&cc={}&pre=1",
+        API_URL_MONTH,
+        year,
+        month,
+        country.to_lowercase()
+    );
 
     match ureq::get(&url).call() {
         Ok(response) => response.into_body().read_to_string().ok(),
@@ -167,8 +173,13 @@ fn fetch_holidays(year: i32, month: u32, _country: &str) -> Option<String> {
 }
 
 /// Fetch holiday data for entire year from isdayoff.ru API.
-pub fn fetch_holidays_year(year: i32, _country: &str) -> Option<String> {
-    let url = format!("{}?year={}&pre=1", API_URL_YEAR, year);
+pub fn fetch_holidays_year(year: i32, country: &str) -> Option<String> {
+    let url = format!(
+        "{}?year={}&cc={}&pre=1",
+        API_URL_YEAR,
+        year,
+        country.to_lowercase()
+    );
 
     match ureq::get(&url).call() {
         Ok(response) => response.into_body().read_to_string().ok(),
