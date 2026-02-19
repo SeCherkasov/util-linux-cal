@@ -19,6 +19,14 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Install Russian locale
+        run: |
+          sudo locale-gen ru_RU.UTF-8
+          sudo update-locale LANG=ru_RU.UTF-8
+
+      - name: Set locale environment
+        run: echo "LANG=ru_RU.UTF-8" >> $GITHUB_ENV
+
       - name: Cache cargo registry
         uses: actions/cache@v4
         with:
