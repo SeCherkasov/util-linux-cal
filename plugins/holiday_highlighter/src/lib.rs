@@ -161,7 +161,7 @@ fn fetch_holidays(year: i32, month: u32, _country: &str) -> Option<String> {
     let url = format!("{}?year={}&month={:02}&pre=1", API_URL_MONTH, year, month);
 
     match ureq::get(&url).call() {
-        Ok(response) => response.into_string().ok(),
+        Ok(response) => response.into_body().read_to_string().ok(),
         Err(_) => None,
     }
 }
@@ -171,7 +171,7 @@ pub fn fetch_holidays_year(year: i32, _country: &str) -> Option<String> {
     let url = format!("{}?year={}&pre=1", API_URL_YEAR, year);
 
     match ureq::get(&url).call() {
-        Ok(response) => response.into_string().ok(),
+        Ok(response) => response.into_body().read_to_string().ok(),
         Err(_) => None,
     }
 }
