@@ -2,6 +2,8 @@
 
 Terminal calendar — a Rust rewrite of the `cal` utility from util-linux.
 
+![Preview](preview/preview.png)
+
 ## Features
 
 - **Flexible display**: single month, three months, year, arbitrary number of months
